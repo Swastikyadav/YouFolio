@@ -1,9 +1,8 @@
 ## Project TODO list.
 
-[x] Initiate a new NextJs project with ShadcnUI.
+- [x] Initiate a new NextJs project with ShadcnUI.
+- [x] Install and setup Prisma ORM.
+- [x] Create new postgres DB in vercel.
+- [x] Connect DB with the project.
 
-[x] Install and setup Prisma ORM.
-
-[x] Create new postgres DB in vercel.
-
-[x] Connect DB with the project.
+- [x] Setup authentication with nextAuth.
