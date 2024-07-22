@@ -1,11 +1,3 @@
-"use server";
-
-import * as auth from "@/auth";
-
-export async function signIn() {
-  return auth.signIn("github");
-}
-
-export async function signOut() {
-  return auth.signOut();
-}
+export { signIn } from "@/actions/signin";
+export { signOut } from "@/actions/signout";
+export { saveUserInfo } from "@/actions/save-userinfo";
