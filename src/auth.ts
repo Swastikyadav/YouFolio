@@ -21,6 +21,15 @@ export const {
     GitHub({
       clientId: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
+      profile(profile) {
+        return {
+          id: profile.id.toString(),
+          email: profile.email,
+          name: profile.name,
+          image: profile.avatar_url,
+          username: profile.login,
+        };
+      },
     }),
   ],
 });
