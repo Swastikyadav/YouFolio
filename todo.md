@@ -12,12 +12,14 @@
 ---
 
 - [x] Identify all different routes for this app will have + data each one shows.
-      | route | data change |
-      | --- | --- |
-      | "/login" | none |
-      | "/signup" | none |
-      | "/dashboard" | user details |
-      | "/[username]" | none |
+
+| route | data change |
+| --- | --- |
+| "/login" | none |
+| "/signup" | none |
+| "/dashboard" | user details |
+| "/[username]" | none |
+
 - [x] Make 'path helper' functions.
 - [x] Create routing folders + their page.tsx
 - [x] Identify places where data changes.
