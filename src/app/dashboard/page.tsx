@@ -1,13 +1,19 @@
 import * as actions from "@/actions";
 import { auth } from "@/auth";
 
+import MinimalistResume from "@/components/templates/minimalistResume";
+
 export default async function Dashboard() {
   const session = await auth();
 
   return (
-    <>
-      Dashboard! <p>{JSON.stringify(session?.user)}</p>
-      {session && (
+    <div className="grid grid-cols-1 md:grid-cols-2">
+      <aside className="p-12">User Details Form</aside>
+      <aside className="p-12">
+        <MinimalistResume />
+      </aside>
+
+      {/* {session && (
         <form
           action={actions.signOut}
           className="mt-10 flex justify-center gap-x-6"
@@ -16,7 +22,7 @@ export default async function Dashboard() {
             SignOut
           </button>
         </form>
-      )}
-    </>
+      )} */}
+    </div>
   );
 }

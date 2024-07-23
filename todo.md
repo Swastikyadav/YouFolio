@@ -34,7 +34,7 @@
 
 ---
 
-- [ ] Add first reusable template component in "@/components/templates".
+- [x] Add first reusable template component in "@/components/templates".
 
 ---
 
