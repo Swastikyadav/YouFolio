@@ -32,4 +32,13 @@ export const {
       },
     }),
   ],
+  callbacks: {
+    async signIn() {
+      console.log("SignIn Successful! Redirect to dashboard page.");
+      return true;
+    },
+    async redirect() {
+      return "/dashboard";
+    },
+  },
 });
