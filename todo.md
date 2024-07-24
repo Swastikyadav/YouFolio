@@ -38,7 +38,8 @@
 
 ---
 
-- [ ] Build dashboard page UI.
+- [x] Build dashboard page UI.
+- [ ] Stringify projects and experiences array to store in user column instead of creating new table. This is not an ideal approach, but it is fine for this project for now.
 - [ ] Show real time preview in template as user updates the form.
 - [ ] Don't let them submit the form if not signedIn.
 - [ ] Use zod and do server side form validations.

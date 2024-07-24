@@ -4,3 +4,4 @@ export * from "./alert";
 export * from "./input";
 export * from "./label";
 export * from "./textarea";
+export * from "./tabs";

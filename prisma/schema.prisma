@@ -40,6 +40,10 @@ model User {
   email         String   @unique
   image         String?
   username      String   @unique @default("example")
+  about         String?
+  specialize    String?
+  skills        String?
+  linkedin      String?
   accounts      Account[]
   sessions      Session[]
 }

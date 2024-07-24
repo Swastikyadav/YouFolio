@@ -1,22 +1,67 @@
-import * as actions from "@/actions";
-import { auth } from "@/auth";
+"use client";
 
+import { useState, useEffect, ChangeEvent } from "react";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { Terminal } from "lucide-react";
+import type { User } from "@prisma/client";
+
+import * as actions from "@/actions";
 import {
   Alert,
   AlertTitle,
   AlertDescription,
-  Input,
-  Label,
-  Textarea,
-  Button,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
 } from "@/components/ui";
-
+import UserForm from "@/components/userForm";
 import MinimalistResume from "@/components/templates/minimalistResume";
-import Image from "next/image";
-import { Terminal } from "lucide-react";
 
-export default async function Dashboard() {
-  const session = await auth();
+export default function Dashboard() {
+  const session = useSession();
+  const [basicInfo, setBasicInfo] = useState<User | null | undefined>({
+    id: "",
+    name: "",
+    username: "",
+    image: "",
+    specialize: "",
+    skills: "",
+    linkedin: "",
+    email: "",
+    about: "",
+  });
+
+  useEffect(() => {
+    async function checkSession() {
+      if (session.status === "authenticated") {
+        const userEmail = session.data?.user?.email;
+        const user = await actions.getUser(userEmail);
+
+        setBasicInfo(user);
+      }
+    }
+
+    checkSession();
+  }, [session.data?.user?.email, session.status]);
+
+  function handleChange(
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    const { id, value } = event.target;
+    setBasicInfo((prevState) => {
+      if (prevState) {
+        return {
+          ...prevState,
+          [id]: value,
+        };
+      }
+      return prevState;
+    });
+  }
+
+  const saveUserInfoAction = actions.saveUserInfo.bind(null, basicInfo);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
@@ -32,86 +77,30 @@ export default async function Dashboard() {
         </Alert>
         <h2 className="text-xl font-medium my-4">Edit Your Details</h2>
 
-        {/* TODO: Move Form into separate component */}
-        <form action="" className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="name">Full Name</Label>
-          <Input type="text" id="name" placeholder="Full Name" />
-
-          <Label htmlFor="imageUrl" className="mt-2">
-            Image URL
-          </Label>
-          <Input
-            type="text"
-            id="imageUrl"
-            placeholder="Ex: https://someurl.com/profilepic.png"
-          />
-
-          <Label htmlFor="special" className="mt-2">
-            Specialization
-          </Label>
-          <Input
-            type="text"
-            id="special"
-            placeholder="Ex: FrontEnd, BackEnd, FullStack Software Engineer"
-          />
-
-          <Label htmlFor="skills" className="mt-2">
-            Skills
-          </Label>
-          <Input
-            type="text"
-            id="skills"
-            placeholder="Ex: JavaScript, React, NextJs, Node"
-          />
-          <small className="text-slate-500">
-            Add 4-5 top skills. Separated by comma.
-          </small>
-
-          <Label htmlFor="githubUrl" className="mt-2">
-            GitHub Link
-          </Label>
-          <Input
-            type="text"
-            id="githubUrl"
-            placeholder="Ex: https://github.com/swastikyadav"
-          />
-
-          <Label htmlFor="linkedinUrl" className="mt-2">
-            LinkedIn Link
-          </Label>
-          <Input
-            type="text"
-            id="linkedinUrl"
-            placeholder="Ex: https://linkedin/in/swastikyadav"
-          />
-
-          <Label htmlFor="email" className="mt-2">
-            Email
-          </Label>
-          <Input
-            type="email"
-            id="email"
-            placeholder="Ex: something@gmail.com"
-          />
-
-          <Label htmlFor="about" className="mt-2">
-            About
-          </Label>
-          <Textarea
-            id="about"
-            placeholder="Brag about your achievements here..."
-          />
-
-          <Button type="submit" className="mt-4 bg-blue-600">
-            Publish & Go Live!
-          </Button>
-        </form>
+        <Tabs defaultValue="basicInfo" className="w-[400px]">
+          <TabsList>
+            <TabsTrigger value="basicInfo">Basic Info</TabsTrigger>
+            <TabsTrigger value="experience">Experience</TabsTrigger>
+            <TabsTrigger value="projects">Projects</TabsTrigger>
+          </TabsList>
+          <TabsContent value="basicInfo">
+            <UserForm
+              user={basicInfo}
+              handleChange={handleChange}
+              saveUserInfoAction={saveUserInfoAction}
+            />
+          </TabsContent>
+          <TabsContent value="experience">
+            Update your experiences here.
+          </TabsContent>
+          <TabsContent value="projects">Update your projects here.</TabsContent>
+        </Tabs>
       </aside>
       <aside className="p-12">
         <MinimalistResume />
       </aside>
 
-      {/* {session && (
+      {session.status === "authenticated" && (
         <form
           action={actions.signOut}
           className="mt-10 flex justify-center gap-x-6"
@@ -120,7 +109,7 @@ export default async function Dashboard() {
             SignOut
           </button>
         </form>
-      )} */}
+      )}
     </div>
   );
 }
