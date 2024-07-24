@@ -59,8 +59,10 @@ export default function Dashboard() {
         const user = await actions.getUser(userEmail);
 
         setBasicInfo(user);
-        user?.experiences && setExperiences(JSON.parse(`${user?.experiences}`));
-        user?.projects && setProjects(JSON.parse(`${user?.projects}`));
+        user?.experiences
+          ? setExperiences(JSON.parse(`${user?.experiences}`))
+          : [];
+        user?.projects ? setProjects(JSON.parse(`${user?.projects}`)) : [];
       }
     }
 
@@ -187,7 +189,11 @@ export default function Dashboard() {
         </Tabs>
       </aside>
       <aside className="p-12">
-        <MinimalistResume />
+        <MinimalistResume
+          user={basicInfo}
+          experiences={experiences}
+          projects={projects}
+        />
       </aside>
     </div>
   );
