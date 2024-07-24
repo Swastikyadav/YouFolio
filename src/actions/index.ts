@@ -1,3 +1,3 @@
 export { signIn } from "@/actions/signin";
 export { signOut } from "@/actions/signout";
-export { getUser, saveUserInfo } from "@/actions/user";
+export { getUser, getUserByUsername, saveUserInfo } from "@/actions/user";

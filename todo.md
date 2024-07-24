@@ -43,12 +43,13 @@
 - [x] Show real time preview in template as user updates the form.
 - [ ] Don't let them submit the form if not signedIn.
 - [ ] Use zod and do server side form validations.
-- [ ] Show live portfolio page URL on successfully saving the user info.
+- [ ] Review chaching and other optimizations.
+- [x] Show live portfolio page URL on successfully saving the user info.
 
 ---
 
-- [ ] Fetch user details from `username` params in "@/app/portfolio/[username]/page.tsx".
-- [ ] Pass fetched details in the template component and render UI.
+- [x] Fetch user details from `username` params in "@/app/portfolio/[username]/page.tsx".
+- [x] Pass fetched details in the template component and render UI.
 
 ---
 

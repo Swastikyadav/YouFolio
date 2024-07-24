@@ -16,6 +16,18 @@ export async function getUser(email: string | undefined | null) {
   }
 }
 
+export async function getUserByUsername(username: string) {
+  if (username) {
+    const user = await db.user.findFirst({
+      where: {
+        username,
+      },
+    });
+
+    return user;
+  }
+}
+
 export async function saveUserInfo(
   user:
     | User
