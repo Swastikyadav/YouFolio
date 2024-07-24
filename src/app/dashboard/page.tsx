@@ -21,6 +21,7 @@ import UserForm from "@/components/userForm";
 import MinimalistResume from "@/components/templates/minimalistResume";
 import ExperienceForm from "@/components/experienceForm";
 import ProjectForm from "@/components/projectForm";
+import Link from "next/link";
 
 export default function Dashboard() {
   const session = useSession();
@@ -131,9 +132,11 @@ export default function Dashboard() {
           <Image src="/images/folio.png" width={100} height={100} alt="logo" />
           {session.status === "authenticated" && (
             <div className="flex">
-              <Button variant="ghost">
-                <EyeIcon width={20} height={20} />
-              </Button>
+              <Link target="_blank" href={`/portfolio/${basicInfo?.username}`}>
+                <Button variant="ghost">
+                  <EyeIcon width={20} height={20} />
+                </Button>
+              </Link>
               {/* <form
                 action={actions.signOut}
                 className="flex justify-center gap-x-6"
@@ -143,6 +146,14 @@ export default function Dashboard() {
               </Button>
               {/* </form> */}
             </div>
+          )}
+          {session.status === "unauthenticated" && (
+            <form action={actions.signIn}>
+              <Button className="text-blue-600 font-bold" variant="ghost">
+                Login
+              </Button>{" "}
+              to start building your portfolio.
+            </form>
           )}
         </div>
         <Alert>

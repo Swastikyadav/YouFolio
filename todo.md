@@ -45,6 +45,7 @@
 - [ ] Add skeleton on /dashboard and /portofolio page while data is loading.
 - [ ] Use zod and do server side form validations.
 - [ ] Review chaching and other optimizations.
+- [ ] Disable form submission on enter.
 - [x] Show live portfolio page URL on successfully saving the user info.
 
 ---

@@ -1,7 +1,6 @@
 import { GithubIcon, LinkedinIcon, MailIcon } from "lucide-react";
 import type { User } from "@prisma/client";
 import Link from "next/link";
-import Image from "next/image";
 
 import { Badge, buttonVariants } from "@/components/ui";
 import TimelineList from "@/components/timelineList";
@@ -29,18 +28,38 @@ export default function MinimalistResume({
     ? JSON.parse(user.projects)
     : [];
 
+  const userWithEmptyState = {
+    name: user?.name || "Your Name",
+    specialize: user?.specialize || "3 years exp || FrontEnd Engineer",
+    skills: user?.skills || "JavaScript, React, Next, Node",
+    about:
+      user?.about ||
+      "3-4 sentences about you. This is where you brag about your achievements big or small.",
+    experiences: experienceList.length
+      ? experienceList
+      : [{ company: "Company Name", duration: "From - To" }],
+    projects: projectsList.length
+      ? projectsList
+      : [
+          {
+            company: "Project Name",
+            description: "2-3 sentences about this project.",
+          },
+        ],
+  };
+
   return (
     <div className="container max-w-3xl border">
       {/* Profile */}
       <div className="flex flex-col-reverse mt-16 sm:flex-row sm:justify-between sm:items-center">
         <section>
           <div className="grid grid-cols-1 gap-1">
-            <h1 className="text-2xl font-bold">{user?.name}</h1>
+            <h1 className="text-2xl font-bold">{userWithEmptyState?.name}</h1>
             <small className="block text-base text-gray-500">
-              {user?.specialize}
+              {userWithEmptyState?.specialize}
             </small>
             <div className="flex flex-wrap gap-2 items-center my-2">
-              {user?.skills?.split(",").map((skill) => (
+              {userWithEmptyState?.skills?.split(",").map((skill) => (
                 <Badge key={skill.trim()} variant="secondary">
                   {skill.trim()}
                 </Badge>
@@ -109,14 +128,16 @@ export default function MinimalistResume({
       {/* About */}
       <div className="grid grid-cols-1 gap-1 my-12">
         <h1 className="text-2xl font-bold">About</h1>
-        <small className="block text-base text-gray-500">{user?.about}</small>
+        <small className="block text-base text-gray-500">
+          {userWithEmptyState?.about}
+        </small>
       </div>
 
       {/* Experience */}
       <div className="grid grid-cols-1 gap-2 my-12">
         <h1 className="text-2xl font-bold">Experience</h1>
         <TimelineList
-          lists={experienceList.map(
+          lists={userWithEmptyState.experiences.map(
             (exp: { company: string; duration: string }) => ({
               headline: exp.company,
               content: exp.duration,
@@ -129,7 +150,7 @@ export default function MinimalistResume({
       <div className="grid grid-cols-1 gap-2 my-12">
         <h1 className="text-2xl font-bold">Projects</h1>
         <TimelineList
-          lists={projectsList.map(
+          lists={userWithEmptyState.projects.map(
             (proj: { company: string; description: string }) => ({
               headline: proj.company,
               content: proj.description,
