@@ -44,6 +44,8 @@ model User {
   specialize    String?
   skills        String?
   linkedin      String?
+  experiences   String?
+  projects      String?
   accounts      Account[]
   sessions      Session[]
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, ChangeEventHandler, useEffect } from "react";
+import { ChangeEventHandler } from "react";
 import type { User } from "@prisma/client";
 
 import { Input, Label, Textarea, Button } from "@/components/ui";

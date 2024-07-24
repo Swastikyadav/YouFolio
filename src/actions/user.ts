@@ -17,10 +17,15 @@ export async function getUser(email: string | undefined | null) {
 }
 
 export async function saveUserInfo(
-  user: User | null | undefined,
+  user:
+    | User
+    | null
+    | undefined
+    | { id: string | undefined; experiences: string }
+    | { id: string | undefined; projects: string },
   formData: FormData
 ) {
-  console.log(formData.get("email"), user, "formData++");
+  console.log(user, "formData++");
   await db.user.update({
     where: { id: user?.id },
     data: { ...user },
