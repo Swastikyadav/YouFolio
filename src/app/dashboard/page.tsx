@@ -37,6 +37,7 @@ export default function Dashboard() {
     about: "",
     experiences: "",
     projects: "",
+    emailVerified: null,
   });
   const [experiences, setExperiences] = useState([
     {
