@@ -44,7 +44,7 @@
 - [x] Don't let them submit the form if not signedIn.
 - [x] Add skeleton on /dashboard and /portofolio page while data is loading.
 - [x] Do server side form validations.
-- [ ] Review chaching and other optimizations.
+- [x] Review chaching and other optimizations.
 - [x] Show live portfolio page URL on successfully saving the user info.
 
 ---
@@ -54,9 +54,10 @@
 
 ---
 
-- [ ] Create new GitHub oAuth app for production.
-- [ ] Use different oAuth credentials based on environment.
-- [ ] Add env variables on vercel.
+- [x] Create new GitHub oAuth app for production.
+- [x] Use different oAuth credentials based on environment.
+- [x] Run prisma migrations for deployment.
+- [x] Add env variables on vercel.
 - [ ] Deploy the app to vercel.
 
 ## Miscellaneous
