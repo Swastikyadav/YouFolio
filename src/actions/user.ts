@@ -30,14 +30,14 @@ export async function getUserByUsername(username: string) {
 }
 
 export async function saveUserInfo(
-  formState: { message: string },
+  formState: { message: string; type: string },
   formData: FormData
 ) {
   const session = await auth();
   const userId = session?.user?.id;
 
   if (!userId) {
-    return { message: "User is not authenticated." };
+    return { message: "User is not authenticated.", type: "error" };
   }
 
   const userData: Record<string, FormDataEntryValue | null> = {
@@ -57,7 +57,7 @@ export async function saveUserInfo(
     !userData.email ||
     !userData.about
   ) {
-    return { message: "Please, fill in all the details." };
+    return { message: "Please, fill in all the details.", type: "error" };
   }
 
   await db.user.update({
@@ -67,10 +67,10 @@ export async function saveUserInfo(
 
   console.log("User updated successfully!");
 
-  // revalidatePath("/dashboard");
-  // revalidatePath(`/portfolio${user?.username}`);
+  // @ts-ignore
+  revalidatePath(`/portfolio/${session?.user?.username}`);
 
-  return { message: "" };
+  return { message: "User info updated successfully!", type: "success" };
 }
 
 export async function saveUserExperiences(experiences: string) {
@@ -88,7 +88,8 @@ export async function saveUserExperiences(experiences: string) {
 
   console.log("User experiences updated successfully!");
 
-  // revalidatePath(`/portfolio${user?.username}`);
+  // @ts-ignore
+  revalidatePath(`/portfolio/${session?.user?.username}`);
 }
 
 export async function saveUserProjects(projects: string) {
@@ -106,5 +107,6 @@ export async function saveUserProjects(projects: string) {
 
   console.log("User projects updated successfully!");
 
-  // revalidatePath(`/portfolio${user?.username}`);
+  // @ts-ignore
+  revalidatePath(`/portfolio/${session?.user?.username}`);
 }

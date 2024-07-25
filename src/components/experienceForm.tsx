@@ -1,5 +1,6 @@
 import { PlusIcon } from "lucide-react";
 import { Input, Button } from "@/components/ui";
+import ButtonWithLoader from "./buttonWithLoader";
 import { ChangeEvent, MouseEventHandler, SetStateAction } from "react";
 
 interface ExperienceShape {
@@ -75,13 +76,9 @@ export default function ExperienceForm({
         </Button>
       </div>
 
-      <Button
-        type="submit"
-        className="mt-4 bg-blue-600"
-        disabled={!isAuthenticated}
-      >
+      <ButtonWithLoader disabled={!isAuthenticated}>
         Publish Your Experience
-      </Button>
+      </ButtonWithLoader>
     </form>
   );
 }
