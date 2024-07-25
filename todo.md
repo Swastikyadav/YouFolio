@@ -41,11 +41,11 @@
 - [x] Build dashboard page UI.
 - [x] Stringify projects and experiences array to store in user column instead of creating new table. This is not an ideal approach, but it is fine for this project for now.
 - [x] Show real time preview in template as user updates the form.
-- [ ] Don't let them submit the form if not signedIn.
+- [x] Don't let them submit the form if not signedIn.
 - [ ] Add skeleton on /dashboard and /portofolio page while data is loading.
 - [ ] Use zod and do server side form validations.
 - [ ] Review chaching and other optimizations.
-- [ ] Disable form submission on enter.
+- [ ] Add loaders throughout the app. On pages, buttons, e.t.c.
 - [x] Show live portfolio page URL on successfully saving the user info.
 
 ---

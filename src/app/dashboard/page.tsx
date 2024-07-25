@@ -115,15 +115,14 @@ export default function Dashboard() {
     setProjects(projects.filter((exp) => exp.id !== +target.id));
   }
 
-  const saveUserInfoAction = actions.saveUserInfo.bind(null, basicInfo);
-  const saveUserExperiences = actions.saveUserInfo.bind(null, {
-    id: basicInfo?.id,
-    experiences: JSON.stringify(experiences),
-  });
-  const saveUserProjects = actions.saveUserInfo.bind(null, {
-    id: basicInfo?.id,
-    projects: JSON.stringify(projects),
-  });
+  const saveUserExperiences = actions.saveUserExperiences.bind(
+    null,
+    JSON.stringify(experiences)
+  );
+  const saveUserProjects = actions.saveUserProjects.bind(
+    null,
+    JSON.stringify(projects)
+  );
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
@@ -173,11 +172,7 @@ export default function Dashboard() {
             <TabsTrigger value="projects">Projects</TabsTrigger>
           </TabsList>
           <TabsContent value="basicInfo">
-            <UserForm
-              user={basicInfo}
-              handleChange={handleChange}
-              saveUserInfoAction={saveUserInfoAction}
-            />
+            <UserForm user={basicInfo} handleChange={handleChange} />
           </TabsContent>
           <TabsContent value="experience">
             <ExperienceForm
@@ -186,6 +181,7 @@ export default function Dashboard() {
               setExperiences={setExperiences}
               addExperience={addExperience}
               deleteExperience={deleteExperience}
+              isAuthenticated={session.status === "authenticated"}
             />
           </TabsContent>
           <TabsContent value="projects">
@@ -195,6 +191,7 @@ export default function Dashboard() {
               setProjects={setProjects}
               addProject={addProject}
               deleteProject={deleteProject}
+              isAuthenticated={session.status === "authenticated"}
             />
           </TabsContent>
         </Tabs>

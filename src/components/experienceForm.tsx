@@ -14,6 +14,7 @@ interface ExperienceFormProps {
   setExperiences: Function;
   addExperience: MouseEventHandler<HTMLButtonElement>;
   deleteExperience: MouseEventHandler<HTMLDivElement>;
+  isAuthenticated: Boolean;
 }
 
 export default function ExperienceForm({
@@ -22,6 +23,7 @@ export default function ExperienceForm({
   addExperience,
   experiences,
   setExperiences,
+  isAuthenticated,
 }: ExperienceFormProps) {
   function handleChange(
     event: ChangeEvent<HTMLInputElement>,
@@ -73,7 +75,11 @@ export default function ExperienceForm({
         </Button>
       </div>
 
-      <Button type="submit" className="mt-4 bg-blue-600">
+      <Button
+        type="submit"
+        className="mt-4 bg-blue-600"
+        disabled={!isAuthenticated}
+      >
         Publish Your Experience
       </Button>
     </form>

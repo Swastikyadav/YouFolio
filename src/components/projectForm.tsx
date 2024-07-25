@@ -14,6 +14,7 @@ interface ProjectFormProps {
   setProjects: Function;
   addProject: MouseEventHandler<HTMLButtonElement>;
   deleteProject: MouseEventHandler<HTMLDivElement>;
+  isAuthenticated: Boolean;
 }
 
 export default function ProjectForm({
@@ -22,6 +23,7 @@ export default function ProjectForm({
   addProject,
   projects,
   setProjects,
+  isAuthenticated,
 }: ProjectFormProps) {
   function handleChange(
     event: ChangeEvent<HTMLInputElement>,
@@ -73,7 +75,11 @@ export default function ProjectForm({
         </Button>
       </div>
 
-      <Button type="submit" className="mt-4 bg-blue-600">
+      <Button
+        type="submit"
+        className="mt-4 bg-blue-600"
+        disabled={!isAuthenticated}
+      >
         Publish Your Project
       </Button>
     </form>
