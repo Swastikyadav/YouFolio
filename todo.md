@@ -58,7 +58,7 @@
 - [x] Use different oAuth credentials based on environment.
 - [x] Run prisma migrations for deployment.
 - [x] Add env variables on vercel.
-- [ ] Deploy the app to vercel.
+- [x] Deploy the app to vercel. --> https://getyoufolio.vercel.app/
 
 ## Miscellaneous
 

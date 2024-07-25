@@ -1,12 +1,13 @@
 "use client";
 
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, useEffect } from "react";
 import { useFormState } from "react-dom";
 import { useSession } from "next-auth/react";
 import type { User } from "@prisma/client";
 
 import * as actions from "@/actions";
-import { Input, Label, Textarea, Button } from "@/components/ui";
+import { Input, Label, Textarea, useToast } from "@/components/ui";
+import ButtonWithLoader from "./buttonWithLoader";
 
 interface UserFormProps {
   user: User | null | undefined;
@@ -14,16 +15,32 @@ interface UserFormProps {
 }
 
 export default function UserForm({ user, handleChange }: UserFormProps) {
+  const { toast } = useToast();
+
   const session = useSession();
   const authUser = session.data;
 
   const [formState, action] = useFormState(actions.saveUserInfo, {
     message: "",
+    type: "",
   });
+
+  useEffect(() => {
+    if (formState.message && formState.type === "success") {
+      toast({
+        title: "Your info updated successfully!",
+        description:
+          "Update your experience and projects as well. View your portfolio by clicking on 'Eye' icon at top.",
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formState.message]);
 
   return (
     <form action={action} className="grid w-full max-w-sm items-center gap-1.5">
-      <small className="text-red-500">{formState?.message}</small>
+      <small className="text-red-500 font-bold">
+        {formState.type === "error" ? formState.message : ""}
+      </small>
 
       <Label htmlFor="name">Full Name</Label>
       <Input
@@ -121,10 +138,12 @@ export default function UserForm({ user, handleChange }: UserFormProps) {
         onChange={handleChange}
       />
 
-      <Button type="submit" className="mt-4 bg-blue-600" disabled={!!!authUser}>
+      <ButtonWithLoader disabled={!!!authUser}>
         Publish & Go Live!
-      </Button>
-      <small className="text-red-500">{formState?.message}</small>
+      </ButtonWithLoader>
+      <small className="text-red-500 font-bold">
+        {formState.type === "error" ? formState.message : ""}
+      </small>
     </form>
   );
 }
