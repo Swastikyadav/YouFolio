@@ -34,20 +34,23 @@
 
 ---
 
-- [ ] Add first reusable template component in "@/components/templates".
+- [x] Add first reusable template component in "@/components/templates".
 
 ---
 
-- [ ] Build dashboard page UI.
-- [ ] Show real time preview in template as user updates the form.
-- [ ] Don't let them submit the form if not signedIn.
-- [ ] Use zod and do server side form validations.
-- [ ] Show live portfolio page URL on successfully saving the user info.
+- [x] Build dashboard page UI.
+- [x] Stringify projects and experiences array to store in user column instead of creating new table. This is not an ideal approach, but it is fine for this project for now.
+- [x] Show real time preview in template as user updates the form.
+- [x] Don't let them submit the form if not signedIn.
+- [x] Add skeleton on /dashboard and /portofolio page while data is loading.
+- [x] Do server side form validations.
+- [ ] Review chaching and other optimizations.
+- [x] Show live portfolio page URL on successfully saving the user info.
 
 ---
 
-- [ ] Fetch user details from `username` params in "@/app/portfolio/[username]/page.tsx".
-- [ ] Pass fetched details in the template component and render UI.
+- [x] Fetch user details from `username` params in "@/app/portfolio/[username]/page.tsx".
+- [x] Pass fetched details in the template component and render UI.
 
 ---
 

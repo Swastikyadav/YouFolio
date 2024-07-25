@@ -28,6 +28,7 @@ export const {
           name: profile.name,
           image: profile.avatar_url,
           username: profile.login,
+          about: profile.bio,
         };
       },
     }),
