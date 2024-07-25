@@ -1,8 +1,9 @@
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 import * as actions from "@/actions";
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
+import { Button } from "@/components/ui";
 
 export default async function Home() {
   const session = await auth();
@@ -52,9 +53,9 @@ export default async function Home() {
           action={actions.signIn}
           className="mt-10 flex justify-center gap-x-6"
         >
-          <button className="group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-slate-900 text-white hover:bg-slate-700 hover:text-slate-100 active:bg-slate-800 active:text-slate-300 focus-visible:outline-slate-900">
+          <Button className="group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-blue-600 text-white hover:bg-slate-700 hover:text-slate-100 active:bg-slate-800 active:text-slate-300 focus-visible:outline-slate-900">
             SignIn With GitHub
-          </button>
+          </Button>
         </form>
       </div>
     </>
