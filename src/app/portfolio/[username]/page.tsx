@@ -1,6 +1,7 @@
 import MinimalistResume from "@/components/templates/minimalistResume";
 import * as actions from "@/actions";
 import Link from "next/link";
+import { db } from "@/db";
 interface PortfolioProps {
   params: {
     username: string;
@@ -27,4 +28,12 @@ export default async function Portfolio(props: PortfolioProps) {
   }
 
   return <MinimalistResume user={user} />;
+}
+
+export async function generateStaticParams() {
+  const users = await db.user.findMany();
+
+  return users.map((user) => ({
+    username: user.username,
+  }));
 }
